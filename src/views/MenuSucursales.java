@@ -19,6 +19,10 @@ import javax.swing.table.DefaultTableModel;
 
 import controllers.LaboratorioController;
 import model.Sucursal;
+import java.awt.Toolkit;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 public class MenuSucursales extends JFrame {
@@ -29,7 +33,6 @@ public class MenuSucursales extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField_search;
 
 	/**
 	 * Launch the application.
@@ -52,6 +55,7 @@ public class MenuSucursales extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuSucursales() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuSucursales.class.getResource("/iconos/virus_drugs_document_medical_investigation_vaccine_icon_140349.png")));
 		setTitle("Sucursales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 573);
@@ -100,27 +104,39 @@ public class MenuSucursales extends JFrame {
 	    scrollPane.setBounds(40, 126, 557, 319);
 	    getContentPane().add(scrollPane);
 		
-		textField_search = new JTextField();
-		textField_search.setBounds(40, 91, 320, 22);
-		contentPane.add(textField_search);
-		textField_search.setColumns(10);
-		
-		JLabel lblDni = new JLabel("Numero de sucursal:");
-		lblDni.setBounds(40, 62, 205, 16);
-		contentPane.add(lblDni);
+		JPanel panel = new JPanel();
+		panel.setBounds(473, 11, 123, 112);
+		contentPane.add(panel);
 		
 		JButton btnAgregar = new JButton("Agregar");
-		btnAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				VistaNuevoSucursal.main(null);
-				setVisible(false);
-				  
-			}
-		});
-		btnAgregar.setBounds(410, 39, 97, 25);
-		contentPane.add(btnAgregar);
+		
+		JButton btnEditar = new JButton("Editar");
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(31)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnAgregar)
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(btnEditar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnEliminar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addGap(21))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(14)
+					.addComponent(btnAgregar)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnEditar)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnEliminar)
+					.addGap(7))
+		);
+		panel.setLayout(gl_panel);
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -137,11 +153,6 @@ public class MenuSucursales extends JFrame {
 				}
 			}
 		});
-
-		btnEliminar.setBounds(519, 77, 97, 25);
-		contentPane.add(btnEliminar);
-		
-		JButton btnEditar = new JButton("Editar");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -156,8 +167,13 @@ public class MenuSucursales extends JFrame {
 				
 			}
 		});
-		btnEditar.setBounds(410, 77, 97, 25);
-		contentPane.add(btnEditar);
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VistaNuevoSucursal.main(null);
+				setVisible(false);
+				  
+			}
+		});
 		
 		
 		

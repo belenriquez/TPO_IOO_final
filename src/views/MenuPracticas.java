@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Toolkit;
 
 
 
@@ -31,7 +32,6 @@ public class MenuPracticas extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField_search;
 
 	/**
 	 * Launch the application.
@@ -54,6 +54,7 @@ public class MenuPracticas extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPracticas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPracticas.class.getResource("/iconos/medicalresult_84054.png")));
 		setTitle("Practicas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 573);
@@ -104,15 +105,6 @@ public class MenuPracticas extends JFrame {
 	    JScrollPane scrollPane = new JScrollPane(table);
 	    scrollPane.setBounds(40, 126, 557, 319);
 	    getContentPane().add(scrollPane);
-		
-		textField_search = new JTextField();
-		textField_search.setBounds(40, 91, 320, 22);
-		contentPane.add(textField_search);
-		textField_search.setColumns(10);
-		
-		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setBounds(40, 62, 56, 16);
-		contentPane.add(lblDni);
 		
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {

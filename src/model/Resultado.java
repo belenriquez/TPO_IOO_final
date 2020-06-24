@@ -1,13 +1,10 @@
 package model;
 
-import java.util.Date;
-
 import enums.TipoValor;
 
 public class Resultado {
 	
 	private int idResultado;
-	private Date fechaEntrega;
 	private Valor valor;
 	
 	public TipoValor tipoValor () {
@@ -22,19 +19,19 @@ public class Resultado {
 		this.idResultado = idResultado;
 	}
 
-	public Date getFechaEntrega() {
-		return fechaEntrega;
-	}
 
-	public void setFechaEntrega(Date fechaEntrega) {
-		this.fechaEntrega = fechaEntrega;
-	}
 
 	public Valor getValor() {
 		return valor;
 	}
 
 	public void setValor(Valor valor) {
+		this.valor = valor;
+	}
+
+	public Resultado(int idResultado, Valor valor) {
+		super();
+		this.idResultado = idResultado;
 		this.valor = valor;
 	}
 	

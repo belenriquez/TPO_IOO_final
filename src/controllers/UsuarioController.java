@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 
 import enums.Operacion;
 import enums.Rol;
+import model.Sucursal;
 import model.Usuario;
 
 public class UsuarioController {
@@ -156,6 +157,10 @@ public class UsuarioController {
 	}
 	
 	public int generateIdUsuario() {
+		Usuario aux = this.getUsuario(this.usuarios.size());
+		while(aux != null) {
+			aux = this.getUsuario(this.usuarios.size() + 1);
+		}
 		return this.usuarios.size() + 1;
 	}
 }

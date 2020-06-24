@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controllers.PacienteController;
 import model.Paciente;
+import java.awt.Toolkit;
 
 
 public class MenuPacientes extends JFrame {
@@ -29,7 +30,6 @@ public class MenuPacientes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField_search;
 
 	/**
 	 * Launch the application.
@@ -52,6 +52,7 @@ public class MenuPacientes extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPacientes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPacientes.class.getResource("/iconos/edition_theuser_theapplication_2909.png")));
 		setTitle("Pacientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 573);
@@ -102,15 +103,6 @@ public class MenuPacientes extends JFrame {
 	    JScrollPane scrollPane = new JScrollPane(table);
 	    scrollPane.setBounds(40, 126, 557, 319);
 	    getContentPane().add(scrollPane);
-		
-		textField_search = new JTextField();
-		textField_search.setBounds(40, 91, 320, 22);
-		contentPane.add(textField_search);
-		textField_search.setColumns(10);
-		
-		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setBounds(40, 62, 56, 16);
-		contentPane.add(lblDni);
 		
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {

@@ -5,54 +5,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controllers.LaboratorioController;
-import controllers.PacienteController;
 import controllers.PracticaController;
 import enums.EstadoPeticion;
 
 public class Peticion {
 
 	private int idPeticion;
-	private transient Paciente paciente;
+	private Paciente paciente;
 	private String obraSocial;
 	private LocalDateTime fechaCarga;
 	private LocalDateTime fechaEntrega;
-	private List<Practica> practicasAsociadas;
-	private transient Sucursal sucursal;
+	private List<Practica> practicasAsociadas = new ArrayList<Practica>();
+	private Sucursal sucursal;
 	private EstadoPeticion estado;
+	private List<Resultado> resultado;
 
-	public Peticion(int idPeticion, int idPaciente, String os, String idSucursal, List<PracticaPeticion> pedidas) {
+	public Peticion(int idPeticion, Paciente paciente, String os, String idSucursal, List<PracticaPeticion> pedidas) {
+		int horas = 0;
 		this.idPeticion = idPeticion;
-		this.paciente = PacienteController.getInstancia().getPaciente(idPaciente);
+		this.paciente = paciente;
 		this.obraSocial = os;
 		this.fechaCarga = LocalDateTime.now();
 
 		if (!pedidas.isEmpty()) {
-			for (PracticaPeticion p : pedidas)
-				this.practicasAsociadas
-						.add(PracticaController.getInstancia().getPractica(p.getCodigoPracticaAsociada()));
+			for (PracticaPeticion p : pedidas) {
+				this.practicasAsociadas.add(PracticaController.getInstancia().getPractica(p.getCodigoPracticaAsociada()));
+				horas = PracticaController.getInstancia().getPractica(p.getCodigoPracticaAsociada()).getCantidadHorasEspera();
+			}
 		} else {
 			this.practicasAsociadas = new ArrayList<Practica>();
 		}
-
-		this.sucursal = LaboratorioController.getInstancia().getSucursal(Integer.valueOf(idSucursal));
-//    	this.finalizado = false;
-//
-//    	this.paciente.addPeticion(this);
-//    	this.sucursal.addPeticion(this);
+		this.fechaEntrega = fechaCarga.plusHours(horas);
+		this.sucursal = LaboratorioController.getInstancia().getSucursalByNroSuc(Integer.valueOf(idSucursal));
+		this.estado= EstadoPeticion.ACTIVA;
 	}
 
-	public Peticion(int idPeticion, Paciente paciente, String obraSocial, LocalDateTime fechaCarga,
-			LocalDateTime fechaEntrega, List<Practica> practicasAsociadas, Sucursal sucursal, EstadoPeticion estado) {
-		super();
-		this.idPeticion = idPeticion;
-		this.paciente = paciente;
-		this.obraSocial = obraSocial;
-		this.fechaCarga = fechaCarga;
-		this.fechaEntrega = fechaEntrega;
-		this.practicasAsociadas = practicasAsociadas;
-		this.sucursal = sucursal;
-		this.estado = estado;
-	}
+
 
 //	public Peticion(int id, int pacienteId, String os, String sucursalId, List<PracticaPedida> practicasPedidas) {
 //    	this.id = id; //PeticionesManager.getInstancia().generateId();
@@ -137,6 +125,15 @@ public class Peticion {
 	public LocalDateTime getFechaCarga() {
 		return fechaCarga;
 	}
+
+	public List<Resultado> getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(List<Resultado> resultado) {
+		this.resultado = resultado;
+	}
+
 
 //	public boolean esCritica() {
 //		return practicasAsociadas.stream().anyMatch(Practica::esCritica);

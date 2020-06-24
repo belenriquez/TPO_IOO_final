@@ -166,11 +166,6 @@ public class MenuUsuarios extends JFrame {
 					.addContainerGap())
 		);
 		panel_1.setLayout(gl_panel_1);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(40, 0, 198, 126);
-		contentPane.add(panel_2);
-		panel_2.setLayout(null);
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

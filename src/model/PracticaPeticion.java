@@ -13,10 +13,14 @@ public class PracticaPeticion {
     private Resultado resultado;
     private int dniPaciente;
 
+    public PracticaPeticion(int idPractica, int idPeticion) {
+    	this.idPeticionAsociada = idPeticion;
+    	this.idPracticaPeticion = idPractica;
+    }
+
     public PracticaPeticion(Practica practica, Object o) {
     	this.codigoPracticaAsociada = practica.getCodigoPractica();
     }
-
 
     public Muestra getMuestra(int IdMuestra) {
     	return null;

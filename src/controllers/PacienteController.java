@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 
 import enums.Operacion;
 import model.Paciente;
+import model.Sucursal;
 
 public class PacienteController {
 	
@@ -44,7 +45,6 @@ public class PacienteController {
 	
 	private void guardarPacientes(){
 		try (Writer writer = new FileWriter("src/json/pacientes.json")) {
-//		    Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 			Gson gson = new Gson();
 		    gson.toJson(this.pacientes, writer);
 		} catch (IOException e) {
@@ -64,6 +64,18 @@ public class PacienteController {
 		return paciente;
 	}
 
+	public Paciente getPacienteByDni(int documento) {
+		Paciente paciente = null;
+		int i = 0;
+		while (documento != -1 && paciente == null && i != pacientes.size()){
+			if(pacientes.get(i).getDni() == documento){
+				paciente = pacientes.get(i);
+			}
+			i++;
+		}
+		return paciente;
+	}
+	
 	public boolean altaPaciente(Paciente paciente){
 		if(!laboratorioController.validarRolUsuario(Operacion.PACIENTE_ALTA) || getPaciente(paciente.getDni()) != null) {
 			return false;
@@ -100,6 +112,10 @@ public class PacienteController {
 	}
 
 	public int generateIdPaciente() {
+		Paciente aux = this.getPaciente(this.pacientes.size());
+		while(aux != null) {
+			aux = this.getPaciente(this.pacientes.size() + 1);
+		}
 		return this.pacientes.size() + 1;
 	}
 }

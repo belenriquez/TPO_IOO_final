@@ -13,9 +13,9 @@ import com.google.gson.reflect.TypeToken;
 
 import enums.EstadoPractica;
 import enums.Operacion;
-import model.Peticion;
 import model.Practica;
 import model.Resultado;
+import model.Sucursal;
 
 public class PracticaController {
 
@@ -217,7 +217,7 @@ public class PracticaController {
 	}
 	
 	private void recuperarResultadosGuardados() {
-		java.lang.reflect.Type listType = new TypeToken<ArrayList<Practica>>() {
+		java.lang.reflect.Type listType = new TypeToken<ArrayList<Resultado>>() {
 		}.getType();
 		try (FileReader reader = new FileReader("src/json/resultados.json")) {
 			this.resultados = new Gson().fromJson(reader, listType);
@@ -226,7 +226,24 @@ public class PracticaController {
 		}
 	}
 	
+	public Resultado getResultadosPractica(int idPeticion, int idPractica) {
+			
+		return null;
+	} 
+	
+	public int generateIdResultado() {
+		Resultado aux = this.getResultado(this.resultados.size());
+		while(aux != null) {
+			aux = this.getResultado(this.resultados.size() + 1);
+		}
+		return this.resultados.size() + 1;
+	}
+	
 	public int generateIdPractica() {
+		Practica aux = this.getPractica(this.practicas.size());
+		while(aux != null) {
+			aux = this.getPractica(this.practicas.size() + 1);
+		}
 		return this.practicas.size() + 1;
 	}
 

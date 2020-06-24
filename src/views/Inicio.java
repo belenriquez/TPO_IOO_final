@@ -19,13 +19,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 import controllers.UsuarioController;
 import javax.swing.JPasswordField;
 import java.awt.Toolkit;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 public class Inicio extends JFrame {
 
 	private JFrame frmLogin;
 	private JTextField textField_UserName;
 	private JLabel lblPassword;
-	private JLabel label_LoginResult;
 	private JPasswordField passwordField;
 
 	/**
@@ -92,10 +93,6 @@ public class Inicio extends JFrame {
 		lblPassword.setBounds(60, 93, 93, 16);
 		frmLogin.getContentPane().add(lblPassword);
 
-		label_LoginResult = new JLabel("");
-		label_LoginResult.setBounds(87, 158, 268, 16);
-		frmLogin.getContentPane().add(label_LoginResult);
-
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,7 +111,7 @@ public class Inicio extends JFrame {
 			}
 
 		});
-		btnLogin.setBounds(308, 198, 97, 25);
+		btnLogin.setBounds(165, 185, 116, 25);
 		frmLogin.getContentPane().add(btnLogin);
 
 		passwordField = new JPasswordField();

@@ -13,6 +13,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class MenuPrincipal extends JFrame {
 
@@ -43,6 +46,7 @@ public class MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPrincipal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/iconos/test-lab-tubes_icon-icons.com_56328.png")));
 		setTitle("Menu laboratorio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 505, 296);
@@ -65,7 +69,7 @@ public class MenuPrincipal extends JFrame {
 				break;
 		}
 		
-		comboBox_opciones.setBounds(29, 37, 342, 22);
+		comboBox_opciones.setBounds(39, 178, 342, 22);
 		contentPane.add(comboBox_opciones);
 		
 		JButton btn_ok = new JButton("Aceptar");
@@ -102,6 +106,11 @@ public class MenuPrincipal extends JFrame {
 		});
 		btn_ok.setBounds(363, 211, 97, 25);
 		contentPane.add(btn_ok);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/iconos/labscientist_101049.png")));
+		lblNewLabel.setBounds(0, 0, 489, 257);
+		contentPane.add(lblNewLabel);
 		
 		
 		
